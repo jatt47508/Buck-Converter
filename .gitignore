@@ -1,0 +1,29 @@
+# Dependencies / build output
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.tsbuildinfo
+
+# KiCad local + auto-backup files
+*.lck
+~*.lck
+*.kicad_prl
+.history/
+**/.history/
+
+# LTspice generated output
+*.raw
+*.op.raw
+*.fft
+*.meas
