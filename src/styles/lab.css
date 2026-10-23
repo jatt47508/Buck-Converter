@@ -110,7 +110,6 @@
 
 .lab__toolbar .seg {
   background: rgba(20, 19, 16, 0.88);
-  backdrop-filter: blur(8px);
 }
 
 .lab__reset {
@@ -123,7 +122,6 @@
   font-size: 8.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  backdrop-filter: blur(8px);
 }
 
 .lab__reset:hover {
@@ -152,7 +150,6 @@
   padding: 16px;
   background: rgba(20, 19, 16, 0.92);
   border: 1px solid var(--line-light);
-  backdrop-filter: blur(10px);
 }
 
 .lab__panel-head {
@@ -291,7 +288,6 @@
   padding: 10px 12px;
   background: rgba(20, 19, 16, 0.88);
   border: 1px solid var(--line-light);
-  backdrop-filter: blur(8px);
 }
 
 .lab__slider {

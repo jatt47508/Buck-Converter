@@ -20,7 +20,7 @@ export function useScrollProgress<T extends HTMLElement>() {
       const travel = el.offsetHeight - window.innerHeight
       const p = travel > 0 ? clamp(-rect.top / travel) : 0
       progressRef.current = p
-      setProgress((prev) => (Math.abs(prev - p) > 0.004 ? p : prev))
+      setProgress((prev) => (Math.abs(prev - p) > 0.008 ? p : prev))
     }
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(read)

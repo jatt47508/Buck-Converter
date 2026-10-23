@@ -194,7 +194,7 @@ export function LabScene({
     <Canvas
       frameloop={active ? 'always' : 'never'}
       shadows
-      dpr={[1, 1.8]}
+      dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true }}
       camera={{ fov: 32, near: 0.5, far: 800, position: [58, 48, 72] }}
       onPointerMissed={() => onSelect(null)}

@@ -72,14 +72,13 @@
   height: 44px;
   padding: 0 14px;
   border: 1px solid rgba(242, 230, 58, 0.28);
-  background: rgba(20, 19, 16, 0.86);
+  background: rgba(20, 19, 16, 0.94);
   color: var(--yellow);
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
-  backdrop-filter: blur(8px);
   transition:
     border-color 0.2s var(--ease),
     color 0.2s var(--ease);

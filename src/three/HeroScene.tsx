@@ -1,4 +1,4 @@
-﻿import { Suspense, useEffect, useMemo, useRef } from 'react'
+﻿import { Suspense, memo, useEffect, useMemo, useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, Html, Lightformer, Line, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
@@ -246,6 +246,21 @@ function Assembly({
   return <group ref={group}>{children}</group>
 }
 
+function SmoothProgress({
+  target,
+  out,
+}: {
+  target: MutableRefObject<number>
+  out: MutableRefObject<number>
+}) {
+  useFrame((_, dt) => {
+    const k = 1 - Math.exp(-Math.min(dt, 0.1) * 9)
+    out.current += (target.current - out.current) * k
+    if (Math.abs(target.current - out.current) < 0.0002) out.current = target.current
+  })
+  return null
+}
+
 function Ready({ onReady }: { onReady: () => void }) {
   useEffect(() => {
     const t = window.setTimeout(onReady, 120)
@@ -254,7 +269,7 @@ function Ready({ onReady }: { onReady: () => void }) {
   return null
 }
 
-export function HeroScene({
+export const HeroScene = memo(function HeroScene({
   progressRef,
   onReady,
   active,
@@ -263,10 +278,12 @@ export function HeroScene({
   onReady: () => void
   active: boolean
 }) {
+  const smoothRef = useRef(progressRef.current)
+
   return (
     <Canvas
       frameloop={active ? 'always' : 'never'}
-      dpr={[1, 1.75]}
+      dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       camera={{ fov: 34, near: 0.1, far: 600, position: [27, 21, 38] }}
       onCreated={({ gl }) => {
@@ -314,21 +331,22 @@ export function HeroScene({
         />
       </Environment>
 
+      <SmoothProgress target={progressRef} out={smoothRef} />
       <Suspense fallback={null}>
-        <Assembly progressRef={progressRef}>
+        <Assembly progressRef={smoothRef}>
           <Board />
           <PcbCopper />
           {PARTS.map((part) => (
-            <Part key={part.ref} part={part} progressRef={progressRef} />
+            <Part key={part.ref} part={part} progressRef={smoothRef} />
           ))}
-          <Annotations progressRef={progressRef} />
+          <Annotations progressRef={smoothRef} />
         </Assembly>
         <Ready onReady={onReady} />
       </Suspense>
-      <CameraRig progressRef={progressRef} />
+      <CameraRig progressRef={smoothRef} />
     </Canvas>
   )
-}
+})
 
 
 
