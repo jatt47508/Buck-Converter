@@ -1,0 +1,328 @@
+﻿.nav {
+  position: fixed;
+  top: calc(var(--inset) + 14px);
+  left: calc(var(--inset) + 16px);
+  right: calc(var(--inset) + 16px);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.nav > * {
+  pointer-events: auto;
+}
+
+.nav__burger {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(242, 230, 58, 0.5);
+  background: var(--charcoal);
+  color: var(--yellow);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition:
+    background 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+
+.nav__burger:hover {
+  background: var(--yellow);
+  color: var(--charcoal);
+}
+
+.nav__burger-lines {
+  display: grid;
+  gap: 4px;
+  width: 18px;
+}
+
+.nav__burger-lines i {
+  display: block;
+  height: 1.5px;
+  background: currentColor;
+  transition: translate 0.25s var(--ease);
+}
+
+.nav__burger:hover .nav__burger-lines i:first-child {
+  translate: 3px 0;
+}
+
+.nav__burger:hover .nav__burger-lines i:last-child {
+  translate: -3px 0;
+}
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid rgba(242, 230, 58, 0.28);
+  background: rgba(20, 19, 16, 0.86);
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition:
+    border-color 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+
+.nav__chip:hover {
+  border-color: var(--orange);
+  color: var(--orange-soft);
+}
+
+.nav__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255, 92, 22, 0.22);
+}
+
+.nav__section {
+  min-width: 196px;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.nav__section b {
+  font-weight: 500;
+  color: var(--orange-soft);
+}
+
+@media (max-width: 900px) {
+  .nav__section {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    top: calc(var(--inset) + 9px);
+    left: calc(var(--inset) + 9px);
+    right: calc(var(--inset) + 9px);
+  }
+
+  .nav__burger {
+    height: 40px;
+    padding: 0 12px;
+  }
+
+  .nav__burger > span:not(.nav__burger-lines) {
+    display: none;
+  }
+
+  .nav__chip {
+    height: 40px;
+    padding: 0 11px;
+  }
+
+  .nav__status {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ menu */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  background: var(--charcoal);
+  color: var(--cream);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: clamp(80px, 12vh, 140px) clamp(24px, 6vw, 100px) clamp(24px, 5vh, 60px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s var(--ease),
+    visibility 0.35s;
+}
+
+.menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu__frame {
+  position: absolute;
+  inset: var(--inset);
+  border: var(--frame) solid var(--orange);
+  pointer-events: none;
+}
+
+.menu__list {
+  list-style: none;
+  align-self: center;
+  width: min(100%, 1000px);
+  margin-inline: auto;
+}
+
+.menu__list li {
+  border-top: 1px solid var(--line-light);
+}
+
+.menu__list li:last-child {
+  border-bottom: 1px solid var(--line-light);
+}
+
+.menu__link {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(14px, 3vw, 34px);
+  padding: clamp(8px, 1.5vh, 16px) 0;
+  text-decoration: none;
+  color: var(--cream);
+  transition:
+    color 0.2s var(--ease),
+    padding 0.25s var(--ease);
+}
+
+.menu__link:hover,
+.menu__link[aria-current='true'] {
+  color: var(--yellow);
+  padding-left: 14px;
+}
+
+.menu__no {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--orange);
+  min-width: 2.4em;
+}
+
+.menu__label {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 5.4vw, 4.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.menu__hint {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255, 251, 228, 0.45);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+  translate: -8px 0;
+  transition:
+    opacity 0.2s var(--ease),
+    translate 0.2s var(--ease);
+}
+
+.menu__link:hover .menu__hint {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.menu__bottom {
+  width: min(100%, 1000px);
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line-light);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 251, 228, 0.58);
+}
+
+.menu__bottom a:hover {
+  color: var(--yellow);
+}
+
+@media (max-width: 720px) {
+  .menu {
+    padding-top: 100px;
+  }
+
+  .menu__hint {
+    display: none;
+  }
+
+  .menu__bottom {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* -------------------------------------------------------------- progress */
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1100;
+  background: transparent;
+  pointer-events: none;
+}
+
+.progress i {
+  display: block;
+  height: 100%;
+  background: var(--orange);
+  transform-origin: left;
+  transition: width 0.08s linear;
+}
+
+.to-top {
+  position: fixed;
+  right: calc(var(--inset) + 18px);
+  bottom: calc(var(--inset) + 18px);
+  z-index: 900;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(242, 230, 58, 0.4);
+  background: var(--charcoal);
+  color: var(--yellow);
+  border-radius: 2px;
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 10px;
+  transition:
+    opacity 0.25s var(--ease),
+    translate 0.25s var(--ease),
+    visibility 0.25s;
+}
+
+.to-top.show {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+}
+
+.to-top:hover {
+  background: var(--orange);
+  color: var(--charcoal);
+}
+

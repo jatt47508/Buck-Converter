@@ -1,0 +1,35 @@
+:root {
+  --charcoal: #141310;
+  --charcoal-2: #1c1a16;
+  --charcoal-3: #24211b;
+  --ink: #1a1915;
+  --ink-2: #2f2d25;
+  --muted: #5c5849;
+  --yellow: #f2e63a;
+  --yellow-deep: #e3d526;
+  --cream: #fffbe4;
+  --paper: #f8f0c6;
+  --orange: #ff5c16;
+  --orange-deep: #b83b0a;
+  --orange-soft: #ffb37e;
+  --teal: #0f766e;
+  --blue: #1d4ed8;
+  --violet: #7c3aed;
+  --line: rgba(20, 19, 16, 0.16);
+  --line-strong: rgba(20, 19, 16, 0.42);
+  --line-light: rgba(255, 251, 228, 0.16);
+  --frame: 12px;
+  --inset: 18px;
+  --font-display: 'Anton', 'Arial Narrow', 'Helvetica Neue', sans-serif;
+  --font-body: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --max: 1320px;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --frame: 7px;
+    --inset: 9px;
+  }
+}
