@@ -1796,6 +1796,30 @@
   color: var(--orange-soft);
 }
 
+.footer__notice {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: clamp(18px, 4vw, 48px);
+  align-items: start;
+  margin-top: clamp(30px, 4.5vw, 54px);
+  padding-top: 18px;
+  border-top: 1px solid var(--line-light);
+}
+
+.footer__notice .mono {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange-soft);
+}
+
+.footer__notice p {
+  max-width: 78ch;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: rgba(255, 251, 228, 0.66);
+}
+
 .footer__bottom {
   display: flex;
   justify-content: space-between;
@@ -1983,6 +2007,11 @@
   .footer__top {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .footer__notice {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 
   .footer__links {

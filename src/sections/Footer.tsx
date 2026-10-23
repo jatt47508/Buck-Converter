@@ -34,10 +34,22 @@ export function Footer() {
           </div>
         </div>
 
+        <div className="footer__notice">
+          <span className="mono">Disclaimer · educational project</span>
+          <p>
+            This buck converter is a personal passion project built to learn and demonstrate
+            power-electronics design. It is not a commercial product and should not be trusted for
+            industry-grade, production, or safety-critical use. The board has not been fabricated or
+            measured, and every electrical result on this site comes from simulation.
+          </p>
+        </div>
+
         <div className="footer__bottom">
-          <span>© {SITE.year} {SITE.author}</span>
+          <span>
+            © {SITE.year} {SITE.author} · Educational use only
+          </span>
           <span>Built from the KiCad and LTspice project files</span>
-          <span>All electrical results are simulated · hardware not built</span>
+          <span>Simulated results · hardware not built</span>
         </div>
       </div>
     </footer>

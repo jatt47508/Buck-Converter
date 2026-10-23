@@ -58,6 +58,8 @@ There is no DRC report in the repository, and the board has not been manufacture
 React 19 · TypeScript · Vite · three.js / React Three Fiber · KiCad 10 · LTspice
 Type: Anton, Archivo, IBM Plex Mono.
 
-## Academic project
+## Academic project and disclaimer
 
-Built as an academic power-electronics project. Simulation data comes from the included LTspice deck; design files come from the included KiCad project. All third-party libraries remain under their respective licenses.
+© 2026 Jatin Kumar Mallick. Educational use only.
+
+This is a personal passion project built to learn and demonstrate power-electronics design. It is not a commercial product and should not be trusted for industry-grade, production, or safety-critical use. The board has not been fabricated or measured, and all electrical results come from simulation. Simulation data comes from the included LTspice deck; design files come from the included KiCad project. All third-party libraries remain under their respective licenses.
