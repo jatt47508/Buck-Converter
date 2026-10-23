@@ -10,6 +10,8 @@ export function Nav() {
   const firstLinkRef = useRef<HTMLAnchorElement>(null)
   const active = useScrollSpy(SECTION_IDS)
   const activeSection = SECTIONS.find((s) => s.id === active) ?? SECTIONS[0]
+  const [tip, setTip] = useState<'sim' | 'section' | null>(null)
+  const wrapRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     document.body.classList.toggle('menu-open', open)
@@ -30,6 +32,15 @@ export function Nav() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      if (!wrapRef.current) return
+      if (!wrapRef.current.contains(e.target as Node)) setTip(null)
+    }
+    document.addEventListener('mousedown', onDown)
+    return () => document.removeEventListener('mousedown', onDown)
+  }, [])
 
   const close = () => setOpen(false)
 
@@ -53,25 +64,55 @@ export function Nav() {
           <span>{open ? 'Close' : 'Menu'}</span>
         </button>
 
-        <div className="nav__right">
-          <span className="nav__chip nav__status">
+        <div className="nav__right" ref={wrapRef}>
+          <button
+            type="button"
+            className={`nav__chip nav__status nav__chip--interactive ${tip === 'sim' ? 'is-tip' : ''}`}
+            onMouseEnter={() => setTip('sim')}
+            onMouseLeave={() => setTip(null)}
+            onClick={() => setTip((v) => (v === 'sim' ? null : 'sim'))}
+            aria-haspopup="true"
+            aria-expanded={tip === 'sim'}
+          >
             <i className="nav__dot" aria-hidden="true" />
             Simulated data
-          </span>
+          </button>
           <a
             className="nav__chip"
             href={SITE.repo}
             target="_blank"
             rel="noreferrer"
             aria-label="Open the project repository on GitHub"
+            title="View KiCad & LTspice sources on GitHub"
           >
             GitHub ↗
           </a>
-          <span className="nav__chip nav__section" aria-live="polite">
+          <button
+            type="button"
+            className={`nav__chip nav__section nav__chip--interactive ${tip === 'section' ? 'is-tip' : ''}`}
+            aria-live="polite"
+            onMouseEnter={() => setTip('section')}
+            onMouseLeave={() => setTip(null)}
+            onClick={() => setTip((v) => (v === 'section' ? null : 'section'))}
+            aria-haspopup="true"
+            aria-expanded={tip === 'section'}
+          >
             <b>{activeSection.short}</b>
             <span>/{String(SECTIONS.length - 1).padStart(2, '0')}</span>
             <span>{activeSection.label}</span>
-          </span>
+          </button>
+
+          <div className={`nav__tip ${tip === 'sim' ? 'is-open' : ''}`} role="tooltip">
+            <span className="nav__tip-kicker">Simulated data</span>
+            <p>Tested and verified in <b>LTspice</b> (BuckMod transient) and designed in <b>KiCad 10</b>.</p>
+            <p>All waveforms, averages, ripple and efficiency shown are from simulation — no measured hardware data.</p>
+          </div>
+
+          <div className={`nav__tip nav__tip--right ${tip === 'section' ? 'is-open' : ''}`} role="tooltip">
+            <span className="nav__tip-kicker">Page overview · {activeSection.label}</span>
+            <p>Scroll-driven showcase: <b>Hero</b> → <b>Principle</b> → <b>Circuit</b> → <b>Simulation</b> → <b>PCB</b> → <b>Downloads</b> → <b>3D Lab</b>.</p>
+            <p>Use the <b>Menu</b> (top-left) to jump to any section instantly.</p>
+          </div>
         </div>
       </header>
 
